@@ -1,0 +1,6 @@
+source "https://supermarket.chef.io"
+
+cookbook 'apt'
+cookbook 'oc-graphite', git: 'git@github.com:horthy/oc-graphite.git'
+cookbook 'chef-grafana', git: 'git@github.com:chef-cookbooks/chef-grafana.git'
+

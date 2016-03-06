@@ -1,0 +1,23 @@
+---
+# settings for metrics reporter
+metrics:
+
+  # report to graphite
+  type: graphite
+
+  # report every 30 seconds
+  interval: 30
+  timeUnit: seconds
+
+  # prefix all metrics with hello.example
+  prefix: hello.example
+
+  # graphite settings
+  host: localhost
+  port: 2003
+
+health:
+  minHealthyHits: 5
+
+server:
+  port: 8081

@@ -1,0 +1,35 @@
+---
+driver:
+  name: vagrant
+  customize:
+    memory: 512
+  network:
+      - ["forwarded_port", {guest: 80, host: 8080}]
+      - ["forwarded_port", {guest: 2003, host: 2003}]
+      - ["forwarded_port", {guest: 3000, host: 3000}]
+      - ["private_network", {ip: "192.168.33.33"}]
+
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: ubuntu-14.04
+
+suites:
+  - name: default
+    run_list:
+      - recipe[apt]
+      - recipe[oc-graphite]
+      - recipe[oc-graphite::graphite_carbon]
+      - recipe[oc-graphite::graphite_web]
+      - recipe[oc-graphite::graphite_web_upstart]
+      - recipe[chef-grafana]
+    attributes:
+        oc-graphite:
+            uwsgi:
+                listen_port: 8000
+            nginx:
+                disable_default_vhost: true
+            web:
+                server: 'nginx'
